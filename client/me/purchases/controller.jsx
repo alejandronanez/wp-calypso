@@ -24,7 +24,6 @@ import ManagePurchaseData from 'components/data/purchases/manage-purchase';
 import NoSitesMessage from 'components/empty-content/no-sites-message';
 import notices from 'notices';
 import paths from './paths';
-import PurchasesData from 'components/data/purchases';
 import PurchasesHeader from './list/header';
 import PurchasesList from './list';
 import { receiveSite } from 'state/sites/actions';
@@ -251,11 +250,11 @@ export default {
 
 		renderPage(
 			context,
-			<ManagePurchaseData
-				component={ ManagePurchase }
-				purchaseId={ context.params.purchaseId }
+			<ManagePurchase
+				purchaseId={ parseInt( context.params.purchaseId, 10 ) }
 				destinationType={ context.params.destinationType }
-				sites={ sites } />
+				user={ user.get() }
+			/>
 		);
 	},
 
