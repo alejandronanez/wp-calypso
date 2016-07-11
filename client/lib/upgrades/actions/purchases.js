@@ -165,32 +165,6 @@ function fetchUserPurchases( userId ) {
 	} );
 }
 
-function removePurchase( purchaseId, userId, onComplete ) {
-	Dispatcher.handleViewAction( {
-		type: ActionTypes.PURCHASE_REMOVE,
-		purchaseId
-	} );
-
-	wpcom.me().deletePurchase( purchaseId, ( error, data ) => {
-		if ( error ) {
-			Dispatcher.handleServerAction( {
-				type: ActionTypes.PURCHASE_REMOVE_FAILED,
-				error: error.message || PURCHASE_REMOVE_ERROR_MESSAGE
-			} );
-		} else {
-			Dispatcher.handleServerAction( {
-				type: ActionTypes.PURCHASE_REMOVE_COMPLETED,
-				purchases: purchasesAssembler.createPurchasesArray( data.purchases ),
-				userId
-			} );
-
-			olark.updateOlarkGroupAndEligibility();
-		}
-
-		onComplete( data && data.success );
-	} );
-}
-
 function cancelAndRefundPurchase( purchaseId, data, onComplete ) {
 	wpcom.cancelAndRefundPurchase( purchaseId, data, function( error, response ) {
 		if ( ! error ) {
@@ -209,6 +183,5 @@ export {
 	deleteStoredCard,
 	fetchSitePurchases,
 	fetchStoredCards,
-	fetchUserPurchases,
-	removePurchase
+	fetchUserPurchases
 };
