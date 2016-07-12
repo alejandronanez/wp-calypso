@@ -5,6 +5,7 @@
  * @return {Array} Purchases
  */
 export const getPurchases = state => state.purchases.data;
+export const getPurchasesError = state => state.purchases.error;
 
 export const getUserPurchases = ( state, userId ) => (
 	state.purchases.hasLoadedUserPurchasesFromServer && getPurchases( state ).filter( purchase => purchase.userId === userId )
