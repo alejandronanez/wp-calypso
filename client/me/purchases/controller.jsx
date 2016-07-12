@@ -15,10 +15,8 @@ import ConfirmCancelDomain from './confirm-cancel-domain';
 import EditCardDetails from './payment/edit-card-details';
 import EditCardDetailsData from 'components/data/purchases/edit-card-details';
 import EditCardDetailsLoadingPlaceholder from './payment/edit-card-details/loading-placeholder';
-import EditPaymentMethod from './payment/edit-payment-method';
 import Main from 'components/main';
 import ManagePurchase from './manage-purchase';
-import ManagePurchaseData from 'components/data/purchases/manage-purchase';
 import NoSitesMessage from 'components/empty-content/no-sites-message';
 import notices from 'notices';
 import paths from './paths';
@@ -163,27 +161,6 @@ export default {
 				component={ EditCardDetails }
 				purchaseId={ parseInt( context.params.purchaseId, 10 ) }
 				loadingPlaceholder={ EditCardDetailsLoadingPlaceholder }
-				sites={ sites } />
-		);
-	},
-
-	editPaymentMethod( context ) {
-		setTitle(
-			titles.editPaymentMethod
-		);
-
-		recordPageView(
-			paths.editPaymentMethod(),
-			'Edit Payment Method'
-		);
-
-		sites.setSelectedSite( context.params.site );
-
-		renderPage(
-			context,
-			<ManagePurchaseData
-				component={ EditPaymentMethod }
-				purchaseId={ context.params.purchaseId }
 				sites={ sites } />
 		);
 	},

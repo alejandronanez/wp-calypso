@@ -100,29 +100,6 @@ function fetchStoredCards() {
 	} );
 }
 
-function fetchUserPurchases( userId ) {
-	Dispatcher.handleViewAction( {
-		type: ActionTypes.PURCHASES_USER_FETCH
-	} );
-
-	wpcom.me().purchases( ( error, data ) => {
-		debug( error, data );
-
-		if ( error ) {
-			Dispatcher.handleServerAction( {
-				type: ActionTypes.PURCHASES_USER_FETCH_FAILED,
-				error: PURCHASES_FETCH_ERROR_MESSAGE
-			} );
-		} else {
-			Dispatcher.handleServerAction( {
-				type: ActionTypes.PURCHASES_USER_FETCH_COMPLETED,
-				purchases: purchasesAssembler.createPurchasesArray( data ),
-				userId
-			} );
-		}
-	} );
-}
-
 function cancelAndRefundPurchase( purchaseId, data, onComplete ) {
 	wpcom.cancelAndRefundPurchase( purchaseId, data, onComplete );
 }
@@ -132,6 +109,5 @@ export {
 	cancelPurchase,
 	deleteStoredCard,
 	fetchSitePurchases,
-	fetchStoredCards,
-	fetchUserPurchases
+	fetchStoredCards
 };
